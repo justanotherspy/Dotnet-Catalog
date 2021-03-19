@@ -1,5 +1,5 @@
-bin/
-obj/
 .DS_Store
-
 workspace.code-workspace
+*/obj/
+*/bin/
+obj/
