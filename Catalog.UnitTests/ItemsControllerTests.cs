@@ -74,10 +74,10 @@ namespace Catalog.UnitTests
         {
             //Arrange
             var itemToCreate = new CreateItemDto(
-                Guid.NewGuid().ToString(), 
-                Guid.NewGuid().ToString(), 
+                Guid.NewGuid().ToString(),
+                Guid.NewGuid().ToString(),
                 rand.Next(1000));
-        
+
 
             var controller = new ItemsController(repositoryStub.Object, loggerStub.Object);
 
@@ -86,7 +86,9 @@ namespace Catalog.UnitTests
 
             //Assert
             var createdItem = (result.Result as CreatedAtActionResult).Value as ItemDto;
-            itemToCreate.Should().BeEquivalentTo(createdItem);
+            itemToCreate.Should().BeEquivalentTo(
+                createdItem,
+                options => options.ComparingByMembers<ItemDto>().ExcludingMissingMembers());
             createdItem.Id.Should().NotBeEmpty();
             createdItem.CreatedDate.Should().BeCloseTo(DateTimeOffset.UtcNow, 1000);
         }
@@ -104,7 +106,7 @@ namespace Catalog.UnitTests
                 Guid.NewGuid().ToString(),
                 Guid.NewGuid().ToString(),
                 existingItem.Price + 3);
-                
+
             var controller = new ItemsController(repositoryStub.Object, loggerStub.Object);
 
             //Act
