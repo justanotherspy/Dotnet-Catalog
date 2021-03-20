@@ -7,7 +7,11 @@ Followed these videos: <https://www.youtube.com/watch?v=bgk8N_rx1F4>
 API:
 
 GET /items
+
 GET /items/{id}
+
 POST /items/{id}
+
 PUT /items/{id}
+
 DELETE /items/{id}
