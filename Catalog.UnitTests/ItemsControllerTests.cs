@@ -49,10 +49,7 @@ namespace Catalog.UnitTests
             var result = await controller.GetItemAsync(Guid.NewGuid());
 
             //Assert
-            result.Value.Should().BeEquivalentTo(
-                expectedItem,
-                options => options.ComparingByMembers<Item>()
-            );
+            result.Value.Should().BeEquivalentTo(expectedItem);
         }
 
         [Fact]
@@ -69,10 +66,7 @@ namespace Catalog.UnitTests
             var actualItems = await controller.GetItemsAsync();
 
             //Assert
-            actualItems.Should().BeEquivalentTo(
-                expectedItems,
-                options => options.ComparingByMembers<Item>()
-            );
+            actualItems.Should().BeEquivalentTo(expectedItems);
         }
 
         [Fact]
@@ -92,10 +86,7 @@ namespace Catalog.UnitTests
 
             //Assert
             var createdItem = (result.Result as CreatedAtActionResult).Value as ItemDto;
-            itemToCreate.Should().BeEquivalentTo(
-                createdItem,
-                options => options.ComparingByMembers<ItemDto>().ExcludingMissingMembers()
-            );
+            itemToCreate.Should().BeEquivalentTo(createdItem);
             createdItem.Id.Should().NotBeEmpty();
             createdItem.CreatedDate.Should().BeCloseTo(DateTimeOffset.UtcNow, 1000);
         }
